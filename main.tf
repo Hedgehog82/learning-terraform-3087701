@@ -57,7 +57,7 @@ module "autoscaling" {
   vpc_zone_identifier        = module.blog_vpc.public_subnets
   traffic_source_attachments = {
     ex-alb = {
-      traffic_source_identifier = module.alb.target_groups["ex-instance"].arn
+      traffic_source_identifier = module.blog_alb.target_groups["ex-instance"].arn
       traffic_source_type       = "elbv2" # default
     }
   }
@@ -110,7 +110,6 @@ module "blog_alb" {
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
-      target_id        = aws_instance.blog.id
     }
   }
 
